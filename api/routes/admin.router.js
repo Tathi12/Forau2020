@@ -4,7 +4,7 @@ require("dotenv").config();
 
 const {mostrarPosts,subirPost,borrarPost,actualizarPosts} = require("../metodos/posts/posts.controller");
 const {register, login} = require("../metodos/usuarios/users.controller");
-const {subscribe, getSubscriptionsOfUser} = require("../metodos/grupos/grupos.controller");
+const {subscribe, getSubscriptionsOfUser} = require("../metodos/grupos/grupo.controller");
 
 
 
@@ -18,3 +18,5 @@ router.post("/login", login);
 
 router.post("/susbcribe",subscribe);
 router.get("/versuscripciones:idUsuarios",getSubscriptionsOfUser);
+
+module.exports = router;

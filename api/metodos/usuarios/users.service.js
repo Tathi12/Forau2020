@@ -22,22 +22,27 @@ module.exports = {
                 if (error) {
                     return callback(error);
                 }
+              
                 return callback(null, results);
+
             }
 
         );
 
     },
 
-    getUserForLogin: (usuario, callback) => {
+    getUserForLogin: (name_user, callback) => {
        
         pool.query(`SELECT * FROM users WHERE name_user = ?`, 
-        [usuario],
+        [name_user],
             (error, results, fields) => {
                 if (error) {
                     callback(error);
                 }
+               
+          
                 return callback(null, results[0]);
+               
             }
         );
     }

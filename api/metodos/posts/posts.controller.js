@@ -75,9 +75,9 @@ module.exports={
         });
     },
 
-    mostrarComenatrios: (req, res) => {
+    mostrarComentarios: (req, res) => {
         const idUsuarios = req.params.idUsuarios;
-        this.mostrarComenatrios(idUsuarios, (err, results) => {
+        this.mostrarComentarios(idUsuarios, (err, results) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({

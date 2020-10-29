@@ -2,9 +2,9 @@ const router = require("express").Router();
 require("dotenv").config();
 
 
-const {mostrarPosts,subirPost,borrarPost,actualizarPosts,subirComenatario,borrarComentario,mostrarComentarios} = require("../metodos/posts/posts.controller");
+const {mostrarPosts,subirPost,borrarPost,actualizarPosts,subirComentario,borrarComentario,mostrarComentarios} = require("../metodos/posts/posts.controller");
 const {register, login} = require("../metodos/usuarios/users.controller");
-const {subscribe, getSubscriptionsOfUser} = require("../metodos/grupos/grupos.controller");
+const {subscribe, getSubscriptionsOfUser} = require("../metodos/grupos/grupo.controller");
 
 
 
@@ -20,8 +20,8 @@ router.post("/susbcribe",subscribe);
 router.get("/versuscripciones:idUsuarios",getSubscriptionsOfUser);
 
 router.get("/mostrarComentarios", mostrarComentarios);
-router.post("/subirComentario", subirComenatario);
-router.get("/borrarComentario", borrarComentario)
+router.post("/subirComentario", subirComentario);
+router.get("/borrarComentario", borrarComentario);
 
 
 

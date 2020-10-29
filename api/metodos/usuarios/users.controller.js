@@ -6,6 +6,7 @@ module.exports = {
 
     register: (req, res) => {
         const body = req.body;
+        //console.log(body.password);
         const salt = genSaltSync(10);
         body.password = hashSync(body.password, salt);
         register(body, (err, results) => {
@@ -33,10 +34,10 @@ module.exports = {
 
        const base64Credentials = req.headers.authorization.split(" ")[1];
        const credentials = Buffer.from(base64Credentials, "base64").toString("ascii");
-       const [user, password] = credentials.split(":");
+       const [name_user, password] = credentials.split(":");
       
 
-       getUserForLogin(user, (err, results) => {
+       getUserForLogin(name_user, (err, results) => {
            if (err) {
                console.log(err);
                return res.status(500).json({
@@ -52,6 +53,8 @@ module.exports = {
            }
            
            const result = compareSync(password, results.password);
+           console.log(result);
+           
            
            if (result) {
                results.password = undefined;
