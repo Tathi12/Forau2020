@@ -2,7 +2,7 @@ const pool = require("../../../config/database");
 
 module.exports = {
     subirPost: (data, callback) => {
-        pool.query(`INSERT INTO posts (categoria,titulo,sub_titulo,arch_adjunto) VALUES (?,?,?,?,?)`, 
+        pool.query(`INSERT INTO posts (body,arch_adjunto,date) VALUES (?,?,?)`, 
         [
           
           data.body,
@@ -23,7 +23,7 @@ module.exports = {
     },
     borrarPost: (posts, callback) => {
        
-        pool.query(`DELETE * FROM posts WHERE body = ?`, 
+        pool.query(`DELETE FROM posts WHERE body = ?`, 
         [posts],
             (error, results, fields) => {
                 if (error) {
@@ -36,11 +36,12 @@ module.exports = {
 
 
     actualizarPosts : (data, callback) => {
-        pool.query(`UPDATE posts  SET body = ?, date =? , arch_adjunto = ? WHERE body = ?  `, 
+        pool.query(`UPDATE posts  SET body = ? , arch_adjunto = ?, date = ?  WHERE idPosts = '?' `, 
         [
            
             data.body,
             data.arch_adjunto,
+            data.date,
 
         ],
             (error, results, fields) => {
@@ -56,7 +57,7 @@ module.exports = {
     },
     mostrarPosts: ( callback) => {
        
-        pool.query(`SELECT * FROM posts `, 
+        pool.query(`SELECT * FROM posts`, 
             (error, results, fields) => 
             {
                 if (error) {

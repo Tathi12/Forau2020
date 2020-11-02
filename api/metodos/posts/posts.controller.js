@@ -20,9 +20,9 @@ module.exports={
         });
     },
     borrarPost: (req, res) => {
-        const titulo = req.params.title;
+        const body = req.params.body;
         
-        borrarPost(titulo, (err, results) => {
+        borrarPost(body, (err, results) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({
