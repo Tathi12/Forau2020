@@ -124,6 +124,39 @@ module.exports = {
                 return callback(null, results[0]);
             }
         );
+    },
+    guardarPost: (data, callback) => {
+        pool.query(`INSERT INTO guardados (idUsuario, idPosts) VALUES (?,?)`, 
+        [
+           data.idUsuarios,
+           data.idPosts
+        ],
+            (error, results, fields) => {
+                if (error) {
+                    return callback(error);
+                }
+                return callback(null, results);
+            }
+
+        );
+
+    },
+      verGuardados: (idUsuarios, callback) => {
+       
+        pool.query(`SELECT u.*,p.* FROM suscripciones s 
+                    LEFT OUTER JOIN  users u ON s.idUsuarios =  u.idUsuarios  
+                    LEFT OUTER JOIN  posts p ON p.idPosts =  p.idPosts
+                    WHERE u.idUsuarios = ? 
+                     `, 
+        [idUsuarios],
+            (error, results, fields) => {
+                if (error) {
+                    callback(error);
+                }
+                return callback(null, results[0]);
+            }
+        );
     }
+
 
 }
