@@ -68,7 +68,9 @@ module.exports = {
         pool.query(`INSERT INTO ubicacion (idUsuarios,pais,provincia,ciudad) VALUES (?,?,?,?)`, 
         [
           data.idUsuarios,
-          data.pq_interes,
+          data.pais,
+          data.provincia,
+          data.ciudad
         
          
           

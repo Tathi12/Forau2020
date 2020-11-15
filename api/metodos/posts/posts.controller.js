@@ -1,9 +1,11 @@
-const { subirPost, borrarPost,actualizarPosts,mostrarPosts} = require("./posts.service");
+const { subirPost, borrarPost,actualizarPosts,mostrarPosts,subirComentario,borrarComentario,mostrarComentarios} = require("./posts.service");
+const {decodeToken} = require('../../../auth/TokenValidation')
 
 module.exports={
     subirPost: (req, res) => {
         const body = req.body;
-        
+        const id_user = decodeToken(req).result.idUsuarios 
+        body.idUsuarios = id_user
         subirPost(body, (err, results) => {
             if (err) {
                 console.log(err);
@@ -93,7 +95,8 @@ module.exports={
     },
     subirComentario: (req, res) => {
         const body = req.body;
-        
+        const id_user = decodeToken(req).result.idUsuarios 
+        body.idUsuarios = id_user
         subirComentario(body, (err, results) => {
             if (err) {
                 console.log(err);

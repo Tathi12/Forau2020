@@ -2,9 +2,9 @@ const pool = require("../../../config/database");
 
 module.exports = {
     subirPost: (data, callback) => {
-        pool.query(`INSERT INTO posts (body,arch_adjunto,date) VALUES (?,?,?)`, 
+        pool.query(`INSERT INTO posts (idUsuarios,body,arch_adjunto,date) VALUES (?,?,?,?)`, 
         [
-          //data.idUsuarios,
+          data.idUsuarios,
           data.body,
           data.arch_adjunto,
           data.date,
@@ -63,15 +63,15 @@ module.exports = {
                 if (error) {
                     callback(error);
                 }
-                return callback(null, results[0]);
+                return callback(null, results);
             }
         );
     },
     subirComentario: (data, callback) => {
-        pool.query(`INSERT INTO comentarios  (idUsuarios, idGrupos, comentarios) VALUES (?,?,?)`, 
+        pool.query(`INSERT INTO comentarios  (idUsuarios, idPosts, comentarios) VALUES (?,?,?)`, 
         [
           data.idUsuarios,
-          data.idGrupos,
+          data.idPosts,
           data.comentarios,
         
 

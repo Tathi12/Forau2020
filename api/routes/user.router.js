@@ -1,29 +1,32 @@
 const router = require("express").Router();
 require("dotenv").config();
 
-
+const { checkToken } = require("../../auth/tokenvalidation");
 const {mostrarPosts,subirPost,borrarPost,actualizarPosts,subirComentario,borrarComentario,mostrarComentarios,verGuardados} = require("../metodos/posts/posts.controller");
-const {register, login} = require("../metodos/usuarios/users.controller");
+const {register, login,registerUbicacion,registerInteres} = require("../metodos/usuarios/users.controller");
 const {subscribe, getSubscriptionsOfUser} = require("../metodos/grupos/grupo.controller");
 
 
 
-router.get("/mostrarPosts", mostrarPosts);
-router.post("/actualizarPost",actualizarPosts);
-router.post("/subirPost", subirPost);
-router.get("/borrarPost",borrarPost);
+router.get("/mostrarPosts",checkToken, mostrarPosts);
+router.post("/actualizarPost",checkToken,actualizarPosts);
+router.post("/subirPost",checkToken, subirPost);
+router.post("/borrarPost/:body",checkToken,borrarPost);
 
 router.post("/registrarse", register);
 router.post("/login", login);
+router.post("/registrarseUbcicacion", registerUbicacion);
+router.post("/registrarseInteres", registerInteres);
 
-router.post("/susbcribe",subscribe);
-router.get("/versuscripciones:idUsuarios",getSubscriptionsOfUser);
 
-router.get("/mostrarComentarios", mostrarComentarios);
-router.post("/subirComentario", subirComentario);
-router.get("/borrarComentario", borrarComentario);
+router.post("/susbcribe",checkToken,subscribe);
+router.get("/versuscripciones:idUsuarios",checkToken,getSubscriptionsOfUser);
 
-router.post("/guardados",verGuardados);
+router.get("/mostrarComentarios",checkToken,mostrarComentarios);
+router.post("/subirComentario", checkToken,subirComentario);
+router.get("/borrarComentario", checkToken,borrarComentario);
+
+router.post("/guardados/:idUsuarios",checkToken,verGuardados);
 
 
 

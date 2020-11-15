@@ -11,7 +11,7 @@ const {subscribe, getSubscriptionsOfUser} = require("../metodos/grupos/grupo.con
 router.get("/mostrarPosts",checkToken, mostrarPosts);
 router.post("/actualizarPost",checkToken,actualizarPosts);
 router.post("/subirPost", checkToken,subirPost);
-router.get("/borrarPost",checkToken,borrarPost);
+router.post("/borrarPost",checkToken,borrarPost);
 
 router.post("/registrarse", register);
 router.post("/login", login);

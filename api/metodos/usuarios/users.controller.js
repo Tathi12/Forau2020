@@ -1,6 +1,7 @@
-const { register, getUserForLogin } = require("./users.service");
+const { register, getUserForLogin,registerInteres,registerUbicacion} = require("./users.service");
 const { genSaltSync, hashSync, compareSync } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
+const {decodeToken} = require('../../../auth/TokenValidation')
 
 module.exports = {
 
@@ -73,6 +74,42 @@ module.exports = {
                });
            }
        });
-   }
+   },
+   registerUbicacion: (req, res) => {
+    const body = req.body;
+    const id_user = decodeToken(req).result.idUsuarios 
+    body.idUsuarios = id_user
+    registerUbicacion(body, (err, results) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).json({
+                success: 0,
+                message: "database connection error",
+            });
+        }
+        return res.status(200).json({
+            success: 1,
+            data: results,
+        });
+    });
+},
+    registerInteres: (req, res) => {
+    const body = req.body;
+    const id_user = decodeToken(req).result.idUsuarios 
+    body.idUsuarios = id_user
+    registerInteres(body, (err, results) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).json({
+                success: 0,
+                message: "database connection error",
+            });
+        }
+        return res.status(200).json({
+            success: 1,
+            data: results,
+        });
+    });
+},
 }
 
