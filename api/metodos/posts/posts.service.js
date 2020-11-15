@@ -4,7 +4,7 @@ module.exports = {
     subirPost: (data, callback) => {
         pool.query(`INSERT INTO posts (body,arch_adjunto,date) VALUES (?,?,?)`, 
         [
-          
+          //data.idUsuarios,
           data.body,
           data.arch_adjunto,
           data.date,

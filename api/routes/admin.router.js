@@ -2,7 +2,7 @@ const router = require("express").Router();
 require("dotenv").config();
 
 const { checkToken } = require("../../auth/tokenvalidation");
-const {mostrarPosts,subirPost,borrarPost,actualizarPosts} = require("../metodos/posts/posts.controller");
+const {mostrarPosts,subirPost,borrarPost,actualizarPosts,} = require("../metodos/posts/posts.controller");
 const {register, login} = require("../metodos/usuarios/users.controller");
 const {subscribe, getSubscriptionsOfUser} = require("../metodos/grupos/grupo.controller");
 
@@ -18,5 +18,7 @@ router.post("/login", login);
 
 router.post("/susbcribe",checkToken,subscribe);
 router.get("/versuscripciones:idUsuarios",checkToken,getSubscriptionsOfUser);
+
+
 
 module.exports = router;
